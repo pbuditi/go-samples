@@ -5,4 +5,4 @@ pipeline:
     - GO15VENDOREXPERIMENT=1
     - CGO_ENABLED=0
   commands:
-    - go test -cover -coverprofile coverage.out
+    - go test
