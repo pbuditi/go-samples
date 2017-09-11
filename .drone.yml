@@ -1,18 +1,12 @@
-pipeline:
-  backend:
-    image: golang
-    commands:
-      - go get
-      - go build
-      - go test
+build:
+  image: golang:1.5
+  environment:
+    - GO15VENDOREXPERIMENT=1
+    - CGO_ENABLED=0
+  commands:
+    - go test -cover -coverprofile coverage.out
 
-  frontend:
-    image: node:6
-    commands:
-      - npm install
-      - npm test
-
-  notify:
-    image: plugins/slack
-    channel: developers
-    username: drone
+publish:
+  coverage:
+    when:
+      branch: master
